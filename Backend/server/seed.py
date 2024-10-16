@@ -1,6 +1,6 @@
 from app import app
 from datetime import datetime
-from models import db, Personnel
+from models import db, Personnel, Unit, Role
 
 
 with app.app_context():
@@ -27,3 +27,33 @@ with app.app_context():
 
     db.session.add_all(personnels)
     db.session.commit()
+
+    print("Seeding units")
+
+    units = [
+        Unit(unit_name="Company", unit_type="Navy", unit_location="Mombasa", created_at=datetime(2001,10,1),),
+        Unit(unit_name="Battalion", unit_type="Army",unit_location="Gilgil", created_at=datetime(2005,10,1)),
+        Unit(unit_name="Corps", unit_type="Marines",unit_location="Mombasa", created_at=datetime(2010,10,7)),
+        Unit(unit_name="Regiments", unit_type="Air-Force", unit_location="Nanyuki", created_at=datetime(1999,4,20)),
+        Unit(unit_name="Brigade", unit_type="Navy", unit_location="Kilifi", created_at=datetime(2013,7,20)),
+        Unit(unit_name="Company", unit_type="Army",unit_location="Nakuru", created_at=datetime(2012,1,2)),
+        Unit(unit_name="Division", unit_type="Marines",unit_location="Likoni", created_at=datetime(2018,5,17)),
+        Unit(unit_name="Platoon", unit_type="Air-Force", unit_location="Nyeri", created_at=datetime(2020,7,10))
+
+    ]
+
+    db.session.add_all(units)
+    db.session.commit()
+
+    print ("Seeding roles")
+
+    roles = [
+        Role(role_name="Captain", role_description="The leader of a unit"),
+        Role(role_name="Cadet", role_description="The soldier on the ground"),
+        Role(role_name="Lieutenant", role_description="The first in command"),
+        Role(role_name="Med", role_description="The Medic on the ground"),
+    ]
+
+    db.session.add_all(roles)
+    db.session.commit()
+
