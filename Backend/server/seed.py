@@ -1,6 +1,6 @@
 from app import app
-from datetime import datetime
-from models import db, Personnel, Unit, Role, Squad
+from datetime import datetime, date
+from models import db, Personnel, Unit, Role, Squad, Operations
 
 
 with app.app_context():
@@ -9,6 +9,7 @@ with app.app_context():
     db.session.query(Unit).delete()
     db.session.query(Role).delete()
     db.session.query(Squad).delete()
+    db.session.query(Operations).delete()
     db.session.commit()
     
 
@@ -79,3 +80,20 @@ with app.app_context():
 
     db.session.add_all(squads)
     db.session.commit()
+   
+
+    print("Seeding operations") 
+    
+    operations = [
+        Operations(operations_name="Operation Desert Storm", operations_type="Combat", operations_description="Fighting terrosists in somalia", start_date=datetime(2020,1,1), end_date=datetime(2024,12,31), operations_status="Aborted", updated_at=datetime.now()),
+        Operations(operations_name="Operation Line Breaker", operations_type="Other", operations_description="Protecting water borders", start_date=datetime(2020,12,31), end_date=datetime(2024,7,21), operations_status="Completed", updated_at=datetime.now()),
+        Operations(operations_name="Operation Iron Justice ", operations_type="Training", operations_description="Providing protection to citizens", start_date=datetime(2021,1,1), end_date=datetime(2024,12,31), operations_status="Ongoing", updated_at=datetime.now()), 
+        Operations(operations_name="Operation Byonet Lightning ", operations_type="Combat", operations_description="Bombing border enemies", start_date=date(2021,12,31), end_date=datetime(2024,11,21), operations_status="Ongoing", updated_at=datetime.now()),
+        Operations(operations_name="Operation Red Waters", operations_type="Combat", operations_description="Pushing back pirates", start_date=datetime(2022,10,12), end_date=datetime(2024,9,12), operations_status="Completed", updated_at=datetime.now()),
+    ]
+
+    db.session.add_all(operations)
+
+    db.session.commit()
+
+
