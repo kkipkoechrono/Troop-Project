@@ -76,6 +76,7 @@ class Droprequest(db.Model):
         updated_at = db.Column(db.DateTime, nullable=False)
 
 def __repr__(self):
+        
         return f'<Droprequest {self.drop_request_id}, Location:{self.drop_request_location}, status:{self.drop_request_status}>'
 
 
