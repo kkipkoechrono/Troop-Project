@@ -1,6 +1,6 @@
 from app import app
 from datetime import datetime, date
-from models import db, Personnel, Unit, Role, Squad, Operations
+from models import db, Personnel, Unit, Role, Squad, Operations, Droprequest
 
 
 with app.app_context():
@@ -10,6 +10,7 @@ with app.app_context():
     db.session.query(Role).delete()
     db.session.query(Squad).delete()
     db.session.query(Operations).delete()
+    db.session.query(Droprequest).delete()
     db.session.commit()
     
 
@@ -96,4 +97,16 @@ with app.app_context():
 
     db.session.commit()
 
+    print("Seeding droprequest")
 
+    droprequest = [
+        Droprequest(drop_request_location="Nakuru", drop_request_time=datetime(2024,4,3), drop_request_description="Training drop for new soldiers",  drop_request_status="Completed", created_at=datetime(2024,9,7), updated_at=datetime.now()),
+        Droprequest(drop_request_location="Nairobi", drop_request_time=datetime(2024,10,11), drop_request_description="Combat drop for injured soldiers", drop_request_status="Ongoing", created_at=datetime(2024,5,6), updated_at=datetime.now()),
+        Droprequest(drop_request_location="Mombasa", drop_request_time=datetime(2024,9,6),drop_request_description="Other drop for citizens", drop_request_status="Ongoing",  created_at=datetime(2024,7,2), updated_at=datetime.now()),
+        Droprequest(drop_request_location="Naivasha", drop_request_time=datetime(2024,11,11), drop_request_description="Training drop for new soldiers", drop_request_status="Completed", created_at=datetime(2024,3,5), updated_at=datetime.now()),
+        Droprequest(drop_request_location="Machakos", drop_request_time=datetime(2024,10,6), drop_request_description="Combat drop for injured soldiers", drop_request_status="Completed", created_at=datetime(2024,2,1), updated_at=datetime.now()),
+        
+        
+    ]
+    db.session.add_all(droprequest)
+    db.session.commit()
