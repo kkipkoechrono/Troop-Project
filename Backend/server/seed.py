@@ -1,13 +1,16 @@
 from app import app
 from datetime import datetime
-from models import db, Personnel, Unit, Role
+from models import db, Personnel, Unit, Role, Squad
 
 
 with app.app_context():
     print("Creating database")
     db.session.query(Personnel).delete()
+    db.session.query(Unit).delete()
+    db.session.query(Role).delete()
+    db.session.query(Squad).delete()
     db.session.commit()
-
+    
 
     print("Seeding personnels")
 
@@ -57,3 +60,22 @@ with app.app_context():
     db.session.add_all(roles)
     db.session.commit()
 
+    print("Seeding squads")
+    squads = [
+        Squad(squad_name="Company 1", squad_size=20, created_at=datetime(2013,12,20), last_update=datetime.now()),
+        Squad(squad_name="Company 2", squad_size=18, created_at=datetime(2002,5,15), last_update=datetime.now()),
+        Squad(squad_name="Battalion 1", squad_size=2, created_at=datetime(2012,1,1), last_update=datetime.now()),
+        Squad(squad_name="Battalion 2", squad_size=3, created_at=datetime(2015,5,20), last_update=datetime.now()),
+        Squad(squad_name="Corps 1", squad_size=15, created_at=datetime(2003,7,7), last_update=datetime.now()),
+        Squad(squad_name="Corps 2", squad_size=12, created_at=datetime(2007,6,25), last_update=datetime.now()),
+        Squad(squad_name="Regiment 1", squad_size=10, created_at=datetime(2018,9,23), last_update=datetime.now()),
+        Squad(squad_name="Regiment 2", squad_size=5, created_at=datetime(2020,5,6), last_update=datetime.now()),
+        Squad(squad_name="Brigade 1", squad_size=10, created_at=datetime(2005,7,29), last_update=datetime.now()),
+        Squad(squad_name="Brigade 2", squad_size=10, created_at=datetime(2010,2,22), last_update=datetime.now()),
+        Squad(squad_name="Company 3", squad_size=22, created_at=datetime(2008,5,26), last_update=datetime.now()),
+        Squad(squad_name="Battalion 3", squad_size=3, created_at=datetime(2023,7,20), last_update=datetime.now()),
+        Squad(squad_name="Corps 3", squad_size=15, created_at=datetime(2024,8,9), last_update=datetime.now()),
+    ]
+
+    db.session.add_all(squads)
+    db.session.commit()
