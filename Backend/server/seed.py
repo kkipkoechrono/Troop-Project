@@ -91,20 +91,20 @@ with app.app_context():
         print("Seeding operations")
         operations = [
             Operations(operations_name="Operation Desert Storm", operations_type="Combat", operations_description="Fighting terrorists in Somalia", start_date=datetime(2020, 1, 1), end_date=datetime(2024, 12, 31), operations_status="Aborted", updated_at=datetime.now()),
-            Operations(operations_name="Operation Line Breaker", operations_type="Other", operations_description="Protecting water borders", start_date=datetime(2020, 1, 1), end_date=datetime(2024, 12, 31), operations_status="In Progress", updated_at=datetime.now()),
+            Operations(operations_name="Operation Line Breaker", operations_type="Other", operations_description="Protecting water borders", start_date=datetime(2020, 1, 1), end_date=datetime(2024, 12, 31), operations_status="Planned", updated_at=datetime.now()),
             Operations(operations_name="Operation Vortex", operations_type="Logistics", operations_description="Delivering supplies to soldiers in war zones", start_date=datetime(2020, 1, 1), end_date=datetime(2024, 12, 31), operations_status="Completed", updated_at=datetime.now()),
-            Operations(operations_name="Operation Fast Forward", operations_type="Information Warfare", operations_description="Cyber warfare and infiltration", start_date=datetime(2020, 1, 1), end_date=datetime(2024, 12, 31), operations_status="Completed", updated_at=datetime.now()),
+            Operations(operations_name="Operation Fast Forward", operations_type="Other", operations_description="Cyber warfare and infiltration", start_date=datetime(2020, 1, 1), end_date=datetime(2024, 12, 31), operations_status="Completed", updated_at=datetime.now()),
         ]
         db.session.add_all(operations)
         db.session.commit()
 
         print("Seeding drop requests")
         droprequest = [
-            Droprequest(drop_request_location="Nakuru", drop_request_time=datetime(2024, 4, 3), drop_request_description="Training drop for new soldiers", drop_request_status="Completed", created_at=datetime(2024, 9, 7), updated_at=datetime.now()),
-            Droprequest(drop_request_location="Nairobi", drop_request_time=datetime(2024, 10, 11), drop_request_description="Combat drop for injured soldiers", drop_request_status="Ongoing", created_at=datetime(2024, 5, 6), updated_at=datetime.now()),
-            Droprequest(drop_request_location="Mombasa", drop_request_time=datetime(2024, 9, 6), drop_request_description="Other drop for citizens", drop_request_status="Ongoing", created_at=datetime(2024, 7, 2), updated_at=datetime.now()),
-            Droprequest(drop_request_location="Naivasha", drop_request_time=datetime(2024, 11, 11), drop_request_description="Training drop for new soldiers", drop_request_status="Completed", created_at=datetime(2024, 3, 5), updated_at=datetime.now()),
-            Droprequest(drop_request_location="Machakos", drop_request_time=datetime(2024, 10, 6), drop_request_description="Combat drop for injured soldiers", drop_request_status="Completed", created_at=datetime(2024, 2, 1), updated_at=datetime.now()),
+            Droprequest(drop_request_location="Nakuru", drop_request_time=datetime(2024, 4, 3), drop_request_description="Training drop for new soldiers", drop_request_status="Approved", created_at=datetime(2024, 9, 7), updated_at=datetime.now()),
+            Droprequest(drop_request_location="Nairobi", drop_request_time=datetime(2024, 10, 11), drop_request_description="Combat drop for injured soldiers", drop_request_status="Pending", created_at=datetime(2024, 5, 6), updated_at=datetime.now()),
+            Droprequest(drop_request_location="Mombasa", drop_request_time=datetime(2024, 9, 6), drop_request_description="Other drop for citizens", drop_request_status="Pending", created_at=datetime(2024, 7, 2), updated_at=datetime.now()),
+            Droprequest(drop_request_location="Naivasha", drop_request_time=datetime(2024, 11, 11), drop_request_description="Training drop for new soldiers", drop_request_status="Approved", created_at=datetime(2024, 3, 5), updated_at=datetime.now()),
+            Droprequest(drop_request_location="Machakos", drop_request_time=datetime(2024, 10, 6), drop_request_description="Combat drop for injured soldiers", drop_request_status="Approved", created_at=datetime(2024, 2, 1), updated_at=datetime.now()),
         ]
         db.session.add_all(droprequest)
         db.session.commit()
