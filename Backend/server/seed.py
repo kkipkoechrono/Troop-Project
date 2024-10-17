@@ -12,12 +12,19 @@ with app.app_context():
     db.session.query(Operations).delete()
     db.session.query(Droprequest).delete()
     db.session.commit()
-    
+
+
+    # Retrieve the IDs of the first unit, role, and squad for assignment
+    unit_ids = [unit.id for unit in Unit.query.all()]
+    role_ids = [role.id for role in Role.query.all()]
+    squad_ids = [squad.id for squad in Squad.query.all()]
+
+
 
     print("Seeding personnels")
 
     personnels = [
-        Personnel(first_name="Quincy", last_name="Mwangi", age=35, rank="Second Lieutenant", phone_number="+123-456-789-", email="example@example.com", joining_date=datetime.now(), last_update=datetime.now()),
+        Personnel(first_name="Quincy", last_name="Mwangi", age=35, rank="Second Lieutenant", phone_number="+123-456-789-", email="example@example.com", joining_date=datetime.now(), last_update=datetime.now(), unit_id=unit_ids[0], role_id=role_ids[0], squad_id=squad_ids[0]),
         Personnel(first_name="John", last_name="Doe", age=40, rank="Captain", phone_number="+987-654-3210", email="johndoe@example.com", joining_date=datetime.now(), last_update=datetime.now()),
         Personnel(first_name="Jane", last_name="Smith", age=28, rank="Cadet", phone_number="+456-789-0123", email="janesmith@example.com", joining_date=datetime.now(), last_update=datetime.now()),
         Personnel(first_name="Alex", last_name="Johnson", age=32, rank="Cadet", phone_number="+789-012-3456", email="alexjohnson@example.com", joining_date=datetime.now(), last_update=datetime.now()),
@@ -58,6 +65,8 @@ with app.app_context():
         Role(role_name="Lieutenant", role_description="The first in command"),
         Role(role_name="Med", role_description="The Medic on the ground"),
     ]
+
+    
 
     db.session.add_all(roles)
     db.session.commit()

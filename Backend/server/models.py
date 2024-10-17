@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import MetaData
+from sqlalchemy import MetaData, ForeignKey
 
 
 
@@ -15,16 +15,20 @@ class Personnel(db.Model):
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     age = db.Column(db.Integer, nullable=False)
-    rank = db.Column(db.String(30), nullable=False)
+    rank = db.Column(db.String(30), ForeignKey('roles.role_name'))
     phone_number= db.Column(db.String(15), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     joining_date = db.Column(db.DateTime, nullable=False)
     last_update = db.Column(db.DateTime, nullable=False)
 
-    # Relationships that have the FK to store unit, squads and roles id
-    unit_id = db.Column(db.Integer, db.ForeignKey('unit_id'))
-    role_id = db.Column(db.Integer, db.ForeignKey('role_id'))
-    squad_id = db.Column(db.Integer, db.ForeignKey('squad_id'))
+    # Relationships that have the FK to the units table and role table.
+    unit_id = db.Column(db.Integer, db.ForeignKey('units.unit_id'))
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.role_id'))
+    squad_id = db.Column(db.Integer, db.ForeignKey('squads.squad_id'))
+
+    # Relationship mapping Personnel to related squades
+    squad = db.relationship('Squad', back_populates='personnels')
+    role = db.relationship('Role', back_populates='personnels')
 
 def __repr__(self):
         return f'<Personnel {self.first_name} {self.last_name}>' 
@@ -37,7 +41,10 @@ class Unit(db.Model):
       unit_name = db.Column(db.String(10), nullable=False)
       unit_type = db.Column(db.Enum('Navy', 'Army', 'Air Force','Marines'), nullable=False)
       unit_location = db.Column(db.String(100), nullable=False)
-      created_at = db.Column(db.DateTime, nullable=False) 
+      created_at = db.Column(db.DateTime, nullable=False)
+
+      #Relationship mapping the unit to the related squads
+      squads = db.relationship('Squad', back_populates='unit')
 
 def __repr__(self):
         return f'<Unit {self.unit_name}>' 
@@ -49,6 +56,10 @@ class Role(db.Model):
       role_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
       role_name = db.Column(db.String(10), nullable=False)
       role_description = db.Column(db.String, nullable=False)
+
+      # Relationship mapping Personnel to related squades
+      personnels = db.relationship('Personnel', back_populates='role')
+
 
 
 def __repr__(self):
@@ -62,7 +73,17 @@ class Squad(db.Model):
        squad_name = db.Column(db.String(100), nullable=False)
        squad_size = db.Column(db.Integer, nullable=False)
        created_at = db.Column(db.DateTime, nullable=False)
-       last_update = db.Column(db.DateTime, nullable=False) 
+       last_update = db.Column(db.DateTime, nullable=False)
+
+       #Relationships that has the Foreign key to the units table
+       unit_id = db.Column(db.Integer, db.ForeignKey('units.unit_id'))
+
+       #Relationships mapping the squads  to related units
+       unit = db.relationship('Unit', back_populates='squads')
+       
+
+       #Relationship mapping the squad table to be related personnel table
+       personnels = db.relationship('Personnel', back_populates='squad')
 
        
 def __repr__(self):
