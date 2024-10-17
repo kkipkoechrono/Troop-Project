@@ -15,7 +15,7 @@ class Personnel(db.Model):
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     age = db.Column(db.Integer, nullable=False)
-    rank = db.Column(db.String(30), ForeignKey('roles.role_name'))
+    rank = db.Column(db.String(30), nullable=False)
     phone_number= db.Column(db.String(15), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     joining_date = db.Column(db.DateTime, nullable=False)
@@ -28,7 +28,8 @@ class Personnel(db.Model):
 
     # Relationship mapping Personnel to related squades
     squad = db.relationship('Squad', back_populates='personnels')
-    role = db.relationship('Role', back_populates='personnels')
+    role = db.relationship('Role', back_populates='personnels', foreign_keys=[role_id])
+    unit = db.relationship('Unit', back_populates='personnels', foreign_keys=[unit_id])
 
 def __repr__(self):
         return f'<Personnel {self.first_name} {self.last_name}>' 
@@ -45,6 +46,7 @@ class Unit(db.Model):
 
       #Relationship mapping the unit to the related squads
       squads = db.relationship('Squad', back_populates='unit')
+      personnels = db.relationship('Personnel', back_populates='unit')
 
 def __repr__(self):
         return f'<Unit {self.unit_name}>' 
