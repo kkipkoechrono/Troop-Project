@@ -21,6 +21,11 @@ class Personnel(db.Model):
     joining_date = db.Column(db.DateTime, nullable=False)
     last_update = db.Column(db.DateTime, nullable=False)
 
+    # Relationships that have the FK to store unit, squads and roles id
+    unit_id = db.Column(db.Integer, db.ForeignKey('unit_id'))
+    role_id = db.Column(db.Integer, db.ForeignKey('role_id'))
+    squad_id = db.Column(db.Integer, db.ForeignKey('squad_id'))
+
 def __repr__(self):
         return f'<Personnel {self.first_name} {self.last_name}>' 
    
