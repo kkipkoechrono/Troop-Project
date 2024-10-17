@@ -123,3 +123,4 @@ class Operations(db.Model):
        
 def __repr__(self):
         return f'<Operation {self.operation_name} (ID: {self.operation_id})>'
+        
