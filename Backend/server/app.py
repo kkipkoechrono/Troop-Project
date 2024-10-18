@@ -1,6 +1,6 @@
-from flask import Flask
+from flask import Flask, jsonify, make_response
 from flask_migrate import Migrate
-from models import db
+from models import db, Personnel, Unit
 
 
 
@@ -17,8 +17,7 @@ migrate = Migrate(app, db)
 
 @app.route('/')
 def index():
-    return "Index for User/Power/HeroPower API"
-
+    return "Index for User/Power/HeroPower API"@app.route('/personnels', methods=['GET'])
 
 
 
