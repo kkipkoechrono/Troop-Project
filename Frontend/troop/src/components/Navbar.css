@@ -7,9 +7,14 @@
   
   .nav h1 {
     margin: 0;     
-    font-size: 39px;
+    font-size: 45px;
     font-family: 'Poppins';   
     color: burlywood;         
+    border-radius: 10px;
+    border: none;
+    white-space: nowrap;
+    background: #414933;
+    padding: 12px 35px;
   }
   
   .anchors {

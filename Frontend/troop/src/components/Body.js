@@ -1,6 +1,6 @@
 import React from 'react'
 import './Body.css'
-//import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Body = () => {
   return (
@@ -15,8 +15,9 @@ const Body = () => {
                 <div className="work">
                     <img src='/Army.jpg' alt=''/>
                     <div className="layer">
-                        <h3>Army</h3>
+                        <h3>ARMY</h3>
                         <p>Millitary combatants on the ground</p>
+                        <Link to='/army'><i class="fa-solid fa-link"></i></Link>
                         
                         
                     </div>
@@ -24,24 +25,27 @@ const Body = () => {
                 <div className="work">
                     <img className='airforce' src='Marines.jpg' alt=''/>
                     <div className="layer">
-                        <h3>Airforce </h3>
+                        <h3>MARINES </h3>
                         <p>Millitary personnel on the air</p>
+                        <Link to='/marines'><i class="fa-solid fa-link"></i></Link>
                         
                     </div>
                 </div>
                 <div className="work">
                     <img src='/Navy.jpg' alt=''/>
                     <div className="layer">
-                        <h3>Navy</h3>
+                        <h3>NAVY</h3>
                         <p>Millitary personnel on the waters</p>
+                        <Link to='/navy'><i class="fa-solid fa-link"></i></Link>
                     </div>
                 </div>
 
                 <div className="work">
                     <img className='airforce' src='/Airforce.jpg' alt=''/>
                     <div className="layer">
-                        <h3>Air-force</h3>
+                        <h3>AIR-FORCE</h3>
                         <p>Millitary personnel on both land and the waters</p>
+                        <Link to='/air-force'><i class="fa-solid fa-link"></i></Link>
                     </div>
                 </div>
             </div>
