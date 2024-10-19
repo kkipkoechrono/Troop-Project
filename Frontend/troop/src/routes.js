@@ -1,39 +1,43 @@
-import React from 'react'
+import React from 'react';
+import Home from './components/Home';
+import ErrorPage from './components/ErrorPage';
 import Navbar from './components/Navbar'
+import Army from './pages/Army';
+import Navy from './pages/Navy';
+import AirForce from './pages/AirForce';
+import Marines from './pages/Marines';
 
 const routes = [
-
     {
-        path: "/",
+        path: '/',
         element: <Home />,
         errorElement: <ErrorPage />
-      }, 
-      {
-        path: "Navbar",
+    },
+    {
+        path: '/navbar',
         element: <Navbar />,
         errorElement: <ErrorPage />
-      }, 
-      {
-        path: "Army",
+    },
+    {
+        path: '/army',
         element: <Army />,
         errorElement: <ErrorPage />
-      },
-      {
-        path: "Navy",
+    },
+    {
+        path: '/navy',
         element: <Navy />,
         errorElement: <ErrorPage />
-      },
-      {
-        path: "Air-force",
-        element: <Air-force />,
+    },
+    {
+        path: '/air-force',
+        element: <AirForce />, // Corrected component name
         errorElement: <ErrorPage />
-      },
-      {
-        path: "Marines",
+    },
+    {
+        path: '/marines',
         element: <Marines />,
         errorElement: <ErrorPage />
-      },
+    },
+];
 
-]
-
-export default routes
+export default routes;

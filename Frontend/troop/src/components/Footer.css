@@ -1,16 +1,24 @@
-.container{
-    background: #303d38;
-    margin-top: 40px;
+section .footer h2{
+    color: #fff;
+    font-size: 38px;
+    text-align: center;
+    font-family: 'Poppins';
 }
-.container p{
+section .footer p{
     color: #fff;
     font-size: 20px;
     line-height: 1.5;
     text-align: center;
 }
-.container h2{
+.container {
+    display: flex;
+    justify-content: space-between; /* This will space out the two divs */
+    align-items: center; /* This will vertically center the items */
+  }
+.container p{
     color: #fff;
-    font-size: 38px;
+    font-size: 20px;
+    line-height: 1.5;
     text-align: center;
 }
 .container h3{
@@ -25,15 +33,29 @@
     padding: 10px;
     transition: transform 0.5s;
 }
-.container a:hover{
+.social a:hover{
     color: burlywood;
     font-size: 35px;
     transform: translateY(-5px);
 }
-.email i{
+.social{
+    margin-left: 50px;
+}
+.social a{
     color: #fff;
     font-size: 30px;
     text-decoration: none;
     margin-top: 20px;
     padding: 10px;
+}
+
+.email{
+float: right;
+margin-right: 60px;
+}
+.email i{
+    color: #fff;
+    font-size: 30px;
+    text-decoration: none;
+
 }
