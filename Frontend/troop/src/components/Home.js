@@ -1,6 +1,8 @@
 import React from 'react';
 import './Home.css';
 import Navbar from './Navbar';
+import Body from './Body';
+import Footer from './Footer';
 
 const Home = () => {
   return (
@@ -8,10 +10,15 @@ const Home = () => {
       <section className='navbar'>
         <Navbar />
       </section>
-      <section className='welcome'>
-        <h1>Welcome to Our Website!</h1>
-        <p>Explore our features and get started.</p>
+
+      <section className='body'>
+        <Body />
       </section>
+
+      <section>
+        <Footer />
+      </section>
+     
     </>
   );
 }
