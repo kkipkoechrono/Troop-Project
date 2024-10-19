@@ -9,7 +9,7 @@
     margin: 0;     
     font-size: 39px;
     font-family: 'Poppins';   
-    color: #fff;         
+    color: burlywood;         
   }
   
   .anchors {
@@ -24,5 +24,16 @@
   }
   
   .anchors a:hover {
-    color: #007bff;           
+    color: burlywood;           
+  }
+  .btn{
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 35px;
+    background: #54643a;
+    text-decoration: none;
+    border-radius: 10px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    border: none;
   }
