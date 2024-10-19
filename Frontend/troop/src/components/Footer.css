@@ -1,0 +1,39 @@
+.container{
+    background: #303d38;
+    margin-top: 40px;
+}
+.container p{
+    color: #fff;
+    font-size: 20px;
+    line-height: 1.5;
+    text-align: center;
+}
+.container h2{
+    color: #fff;
+    font-size: 38px;
+    text-align: center;
+}
+.container h3{
+    color: #fff;
+    font-size: 28px;
+}
+.container a{
+    color: #fff;
+    font-size: 30px;
+    text-decoration: none;
+    margin-top: 20px;
+    padding: 10px;
+    transition: transform 0.5s;
+}
+.container a:hover{
+    color: burlywood;
+    font-size: 35px;
+    transform: translateY(-5px);
+}
+.email i{
+    color: #fff;
+    font-size: 30px;
+    text-decoration: none;
+    margin-top: 20px;
+    padding: 10px;
+}

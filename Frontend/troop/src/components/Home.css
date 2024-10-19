@@ -1,4 +1,10 @@
 body{
-    background: linear-gradient(135deg,#202b27, #54643a,  #947a5c, #6f6b62);
+    background: #202b27;
     height: 100dvh;
+}
+section .body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
