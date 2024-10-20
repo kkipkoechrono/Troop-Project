@@ -10,9 +10,18 @@ const Navbar = () => {
 
     <div className='anchors'>
       <Link to='/'>Home</Link>
-      <a href='#services'>Units</a>
-      <a href='#about'>About</a>
-      <a className='btn' href='#contact'>Login/Signup</a>
+     <a className='dropdown' href='#services'>Units <i class="fa-solid fa-angle-down"></i>
+       <div className='content'>
+         <Link to='/army'>Army</Link>
+         <Link to='/airforce'>Air Force</Link>
+         <Link to='/navy'>Navy</Link>
+         <Link to='/marines'>Marines</Link>
+        
+       </div>
+     
+     </a>
+     <Link to='/about'>About</Link>
+      <Link className='btn' to='/login'>Login/Signup</Link>
     </div>
     </div>
     </>
