@@ -11,7 +11,7 @@ const Body = () => {
     <p>This is the place where all army related data is stored and used for millitary purposes.<br/>We help millitary leaders assign personnel to duties,update personnel data and even add or remove personnel</p>
   </section>
 
-  <div className="work-list">
+  <div id="work-list">
                 <div className="work">
                     <img src='/Army.jpg' alt=''/>
                     <div className="layer">
