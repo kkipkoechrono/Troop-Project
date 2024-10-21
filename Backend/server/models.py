@@ -89,7 +89,7 @@ class Droprequest(db.Model):
 class Operations(db.Model):
     __tablename__ = 'operations'
 
-    operations_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    operations_id =  db.Column(db.Integer, primary_key=True, autoincrement=True)
     operations_name = db.Column(db.String(200), nullable=False)
     operations_description = db.Column(db.Text, nullable=False)
     operations_type = db.Column(db.Enum('Reconnaissance', 'Combat', 'Rescue', 'Logistics', 'Training', 'Other', name='operation_type_enum'), nullable=False)
@@ -97,10 +97,13 @@ class Operations(db.Model):
     end_date = db.Column(db.DateTime, nullable=False)
     operations_status = db.Column(db.Enum('Planned', 'Ongoing', 'Completed', 'Aborted', name='operation_status_enum'), default='Planned', nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
+         
+       
+def __repr__(self):
+        return f'<Operation {self.operation_name} (ID: {self.operation_id})>'
+   
 
-    def __repr__(self):
-        return f'<Operation {self.operations_name} (ID: {self.operations_id})>'
-
+    
 class User(db.Model):
     __tablename__ = 'users'
 

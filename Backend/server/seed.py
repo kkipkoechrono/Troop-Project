@@ -111,6 +111,5 @@ with app.app_context():
 
         print("Seeding completed successfully")
 
-# Run the seed database function
-
+# Run the seed 
 
