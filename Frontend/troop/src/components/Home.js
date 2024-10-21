@@ -16,7 +16,7 @@ const Home = () => {
     <section>
       <Register/>
     </section>
-     <section className='navbar'>
+    <section className='navbar'>
         <Navbar />
       </section>
 
