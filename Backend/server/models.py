@@ -101,3 +101,26 @@ class Operations(db.Model):
        
 def __repr__(self):
         return f'<Operation {self.operation_name} (ID: {self.operation_id})>'
+    operations_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    operations_name = db.Column(db.String(200), nullable=False)
+    operations_description = db.Column(db.Text, nullable=False)
+    operations_type = db.Column(db.Enum('Reconnaissance', 'Combat', 'Rescue', 'Logistics', 'Training', 'Other', name='operation_type_enum'), nullable=False)
+    start_date = db.Column(db.DateTime, nullable=False)
+    end_date = db.Column(db.DateTime, nullable=False)
+    operations_status = db.Column(db.Enum('Planned', 'Ongoing', 'Completed', 'Aborted', name='operation_status_enum'), default='Planned', nullable=False)
+    updated_at = db.Column(db.DateTime, nullable=False)
+
+    def __repr__(self):
+        return f'<Operation {self.operations_name} (ID: {self.operations_id})>'
+
+class User(db.Model):
+    __tablename__ = 'users'
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(120), nullable=False)
+
+def __repr__(self):
+    return f'<User {self.username}>'
+
