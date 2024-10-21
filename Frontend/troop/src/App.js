@@ -10,8 +10,10 @@ import About from './pages/About';
 import Register from './components/Register';
 import LoginForm from './components/LoginForm';
 
+
 const App = () => {
   return (
+   
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -24,7 +26,7 @@ const App = () => {
         <Route path='/register' element={<Register/>}/>
         <Route path="/loginform" element={<LoginForm />} />
       </Routes>
-    </Router>
+    </Router> 
   );
 }
 
