@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <section className='footer'>
       <div className='container'>
-        <p>�� 2022 Troop Tracker.<span/> All rights reserved.</p>
+        
 
         <h2>Contact Us</h2>
         <h3>Socials:</h3>
@@ -20,8 +20,9 @@ const Footer = () => {
           <div className="email">
           <i class="fa-regular fa-envelope"></i>
           <a href='mailto:example@example.com'>trooptracker254@gmail.com</a>
-          </div>
 
+          </div>
+          <p>�� 2022 Troop Tracker.<span/> All rights  reserved.</p>
           </div>
     </section>
   )

@@ -1,6 +1,7 @@
 .container{
     background: #303d38;
     margin-top: 40px;
+    height: 30px;
 }
 .container p{
     color: #fff;
