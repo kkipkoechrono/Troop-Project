@@ -1,10 +1,10 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 
-const Marines = () => {
+const AirForce = () => {
   return (
     <div><Navbar/></div>
   )
 }
 
-export default Marines
+export default AirForce

@@ -7,9 +7,14 @@
   
   .nav h1 {
     margin: 0;     
-    font-size: 39px;
+    font-size: 45px;
     font-family: 'Poppins';   
     color: burlywood;         
+    border-radius: 10px;
+    border: none;
+    white-space: nowrap;
+    background: #414933;
+    padding: 12px 35px;
   }
   
   .anchors {
@@ -21,6 +26,9 @@
     text-decoration: none;     
     color: #fff;      
     font-size: 20px; 
+  }
+  .anchors a i{
+    font-size: 15px;
   }
   
   .anchors a:hover {
@@ -37,3 +45,41 @@
     transition: all 0.3s ease;
     border: none;
   }
+  .dropdown {
+    position: relative; /* Ensure the content is positioned relative to the dropdown */
+    display: inline-block; /* Allow dropdown to fit content */
+    text-decoration: none;
+    color: black;
+    padding: 10px 15px;
+    cursor: pointer; 
+}
+
+.content {
+    position: absolute;
+    background-color: #414933;
+    min-width: 100px;
+    box-shadow: 2px 2px 5px black;
+    display: none;
+    opacity: 0; 
+    transition: opacity 0.3s ease, transform 0.3s ease; 
+    transform: translateY(10px); 
+    z-index: 1;
+}
+
+.dropdown:hover .content {
+    display: block;
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
+.content a {
+    display: block; 
+    color: white; 
+    padding: 10px 15px; 
+    text-decoration: none; 
+}
+
+.content a:hover {
+    background-color: #575c4d; 
+    color: yellow; 
+}
