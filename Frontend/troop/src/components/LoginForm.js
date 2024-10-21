@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
-
+import { Link } from 'react-router-dom';
+import './LoginForm.css' 
 const API_URL = 'http://127.0.0.1:5555';
 
 const LoginForm = () => {
@@ -44,7 +44,7 @@ const LoginForm = () => {
     };
 
     return (
-        <div>
+        <div className='login-container'>
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -68,6 +68,8 @@ const LoginForm = () => {
                     />
                 </div>
                 <button type="submit">Login</button>
+                <Link to="/register">Don't have an account ? Register here</Link>
+
             </form>
             {errors.api && <p style={{ color: 'red' }}>{errors.api}</p>}
             {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}

@@ -3,13 +3,13 @@ import './Home.css';
 import Navbar from './Navbar';
 import Body from './Body';
 import Footer from './Footer';
-import Register from './Register';
+
 import LoginForm from './LoginForm';
 
 const Home = () => {
   return (
     <section>
-      <Register/>
+  
       <LoginForm/>
     </section>
     /*<>
