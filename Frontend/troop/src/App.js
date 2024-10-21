@@ -7,6 +7,8 @@ import Marines from './pages/Marines';
 import AirForce from './pages/AirForce'
 import Login from './pages/Login'
 import About from './pages/About';
+import Register from './components/Register';
+import LoginForm from './components/LoginForm';
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
         <Route path='/air-force' element={<AirForce/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/about' element={<About/>}/>
+        <Route path='/register' element={<Register/>}/>
+        <Route path="/loginform" element={<LoginForm />} />
       </Routes>
     </Router>
   );
