@@ -9,6 +9,8 @@ import Login from './pages/Login'
 import About from './pages/About';
 import Register from './components/Register';
 import LoginForm from './components/LoginForm';
+import LandingPage from './components/LandingPage';
+
 
 
 const App = () => {
@@ -16,7 +18,8 @@ const App = () => {
    
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<LandingPage/>} />
+        <Route path="/home" element={<Home />} />
         <Route path="/army" element={<Army />} />
         <Route path='/navy' element={<Navy/>} />
         <Route path='/marines' element={<Marines/>} />

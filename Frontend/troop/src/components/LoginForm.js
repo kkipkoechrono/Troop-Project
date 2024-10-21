@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './LoginForm.css' 
+import {useNavigate} from 'react-router-dom'
 const API_URL = 'http://127.0.0.1:5555';
 
 const LoginForm = () => {
@@ -12,6 +13,8 @@ const LoginForm = () => {
 
     const [errors, setErrors] = useState({});
     const [successMessage, setSuccessMessage] = useState('');
+
+    const navigate = useNavigate();
 
 
     const handleChange = (e) => {
@@ -31,6 +34,8 @@ const LoginForm = () => {
           const token = response.data.token;
           localStorage.setItem('authToken', token);
           setSuccessMessage('Login successful');
+
+          navigate('/home'); // Redirect to dashboard after successful login
 
         }
       } catch (error) {
