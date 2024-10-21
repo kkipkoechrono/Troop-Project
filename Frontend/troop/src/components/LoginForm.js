@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
 const API_URL = 'http://127.0.0.1:5555';
 
 const LoginForm = () => {
@@ -11,6 +12,7 @@ const LoginForm = () => {
 
     const [errors, setErrors] = useState({});
     const [successMessage, setSuccessMessage] = useState('');
+
 
     const handleChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,6 +31,7 @@ const LoginForm = () => {
           const token = response.data.token;
           localStorage.setItem('authToken', token);
           setSuccessMessage('Login successful');
+
         }
       } catch (error) {
         console.error('Login error:', error); // Debugging line

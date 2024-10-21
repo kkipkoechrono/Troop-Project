@@ -14,6 +14,9 @@ const Home = () => {
     </section>
     /*<>
     <section>
+      <LoginForm/>
+    </section>
+    <section>
       <Register/>
     </section>
      <section className='navbar'>
@@ -27,9 +30,9 @@ const Home = () => {
       <section>
         <Footer />
       </section>
-     
-    </>*/
+    </>
+    */
   );
 }
 
-export default Home;
+export default Home
