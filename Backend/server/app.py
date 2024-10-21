@@ -1,11 +1,17 @@
 from flask import Flask, jsonify, make_response, request, abort
-from flask_migrate import Migrate   
-from models import db, Personnel, Unit, Role, Squad, Droprequest, Operations
-from datetime import datetime
+from flask_migrate import Migrate 
+from flask_bcrypt import Bcrypt
+from flask_cors import CORS
+import jwt
+from models import db, Personnel, Unit, Role, Squad, Droprequest, Operations, User
+import datetime
+from datetime import timedelta
 
 
 
 app = Flask(__name__)
+CORS(app)
+app.config['SECRET_KEY'] = '5bcd32d181b843adb1b09fda387692b3'
 
 # Configure your database connection
 
@@ -15,11 +21,100 @@ app.json.compact = False
 
 db.init_app(app)
 migrate = Migrate(app, db)
+Bcrypt = Bcrypt(app)
 
 @app.route('/')
 def index():
-    return "Index for User/Power/HeroPower API"
+    return "Millitary Admin"
 
+##############################################################################################
+@app.route('/register', methods=['POST'])
+def register():
+    data = request.get_json()
+    username = data['username']
+    email = data['email']
+    password = data['password']
+
+    user = User.query.filter_by(username=username ).first()
+    if user:
+        return jsonify({'message': 'Username already exists'}), 400
+    if User.query.filter_by(email=email).first():
+        return jsonify({'message': 'Email already exists'}), 400
+    
+    hashed_password = Bcrypt.generate_password_hash(password).decode('utf-8')
+    new_user = User(username=username, email=email, password=hashed_password)
+    db.session.add(new_user)
+    db.session.commit()
+    return jsonify({'message': 'User created successfully', 'user_id':new_user.id}), 201
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return jsonify({'message': 'Invalid credentials'}), 401
+    
+    if not Bcrypt.check_password_hash(user.password, password):
+        return jsonify({'message': 'Invalid credentials'}), 401
+    
+    token = jwt.encode(
+        {"user_id": user.id, "exp": datetime.datetime.utcnow() + timedelta(minutes=60)},
+        app.config['SECRET_KEY'],
+        algorithm="HS256"
+    )
+    return jsonify({'token': token}), 200
+
+'''@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return jsonify({'message': 'Invalid credentials'}), 401
+    
+    if not Bcrypt.check_password_hash(user.password, password):
+        return jsonify({'message': 'Invalid credentials'}), 401
+    
+    token = jwt.encode(
+        {"user_id": user.id, "exp": datetime.datetime.utcnow() + timedelta(minutes=60)},
+        app.config['SECRET_KEY'],
+        algorithm="HS256"
+    )
+    return jsonify({'token': token}), 200'''
+
+
+@app.route('/protected', methods=['GET'])
+def protected():
+    token = request.headers.get('Authorization')
+    if not token:
+        return jsonify({'message': 'Token is missing'}), 401
+
+    try:
+        token = token.split()[1]
+        if token:
+            decoded_token = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
+            user_id = decoded_token['user_id']
+            user = User.query.get(user_id)
+            return jsonify({"Access granted"}), 200
+        else:
+            return jsonify({'message': 'Invalid token'}), 403
+    except jwt.ExpiredSignatureError:
+        return jsonify({'message': 'Token is expired'}), 401
+    
+
+
+
+
+
+
+
+
+###############################################################################################
 #Route to get all personnel
 @app.route('/personnels', methods=['GET'])
 def get_personnels():
