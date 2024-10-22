@@ -29,7 +29,7 @@ const App = () => {
         <Route path='/register' element={<Register/>}/>
         <Route path="/loginform" element={<LoginForm />} />
       </Routes>
-    </Router> 
+    </Router>
   );
 }
 
