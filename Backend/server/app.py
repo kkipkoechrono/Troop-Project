@@ -4,7 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 import jwt
 from models import db, Personnel, Unit, Role, Squad, Droprequest, Operations, User
-import datetime
+from datetime import datetime
 from datetime import timedelta
 
 
@@ -67,25 +67,6 @@ def login():
     )
     return jsonify({'token': token}), 200
 
-'''@app.route('/login', methods=['POST'])
-def login():
-    data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
-
-    user = User.query.filter_by(username=username).first()
-    if not user:
-        return jsonify({'message': 'Invalid credentials'}), 401
-    
-    if not Bcrypt.check_password_hash(user.password, password):
-        return jsonify({'message': 'Invalid credentials'}), 401
-    
-    token = jwt.encode(
-        {"user_id": user.id, "exp": datetime.datetime.utcnow() + timedelta(minutes=60)},
-        app.config['SECRET_KEY'],
-        algorithm="HS256"
-    )
-    return jsonify({'token': token}), 200'''
 
 
 @app.route('/protected', methods=['GET'])
@@ -167,31 +148,46 @@ def get_personnel_by_id(id):
     return make_response(jsonify(personnel_dict), 200)
 
 #Adding personnel
+
 @app.route('/personnels', methods=['POST'])
 def add_personnel():
     data = request.get_json()
+    
+    # Check if required fields are present
+    required_fields = ['first_name', 'last_name', 'age', 'rank', 'phone_number', 'email', 'joining_date', 'unit_id', 'role_id', 'squad_id']
+    for field in required_fields:
+        if field not in data:
+            return make_response(jsonify({'error': f'Missing field: {field}'}), 400)
 
-    # Create a new Personnel object
-    new_personnel = Personnel(
-        first_name=data['first_name'],
-        last_name=data['last_name'],
-        age=data['age'],
-        rank=data['rank'],
-        phone_number=data['phone_number'],
-        email=data['email'],
-        joining_date=datetime.strptime(data['joining_date'], '%Y-%m-%d'),  # Assuming date is provided in YYYY-MM-DD format
-        last_update=datetime.utcnow(),
-        unit_id=data['unit_id'],
-        role_id=data['role_id'],
-        squad_id=data['squad_id']
-    )
+    try:
+        # Create a new Personnel object
+        new_personnel = Personnel(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            age=data['age'],
+            rank=data['rank'],
+            phone_number=data['phone_number'],
+            email=data['email'],
+            joining_date=datetime.strptime(data['joining_date'], '%Y-%m-%d'),  # Ensure correct date format
+            last_update=datetime.utcnow(),
+            unit_id=data['unit_id'],
+            role_id=data['role_id'],
+            squad_id=data['squad_id']
+        )
 
-    db.session.add(new_personnel)
-    db.session.commit()
+        db.session.add(new_personnel)
+        db.session.commit()
 
-    return make_response(jsonify({'message': 'Personnel added successfully', 'id': new_personnel.id}), 201)
+        return make_response(jsonify({'message': 'Personnel added successfully', 'id': new_personnel.id}), 201)
+
+    except Exception as e:
+        db.session.rollback()  # Rollback in case of an error
+        return make_response(jsonify({'error': str(e)}), 500)
+
+
 
 #Updating a personnel
+
 @app.route('/personnels/<int:id>', methods=['PUT'])
 def update_personnel(id):
     personnel = Personnel.query.get(id)
@@ -200,31 +196,31 @@ def update_personnel(id):
 
     data = request.get_json()
 
+    # Check for unique email constraint if the email is being updated
+    if 'email' in data and data['email'] != personnel.email:
+        existing_personnel = Personnel.query.filter_by(email=data['email']).first()
+        if existing_personnel:
+            return make_response(jsonify({'error': 'Email already exists'}), 400)
+
     # Update fields if provided in the request body
     personnel.first_name = data.get('first_name', personnel.first_name)
     personnel.last_name = data.get('last_name', personnel.last_name)
     personnel.age = data.get('age', personnel.age)
     personnel.rank = data.get('rank', personnel.rank)
     personnel.phone_number = data.get('phone_number', personnel.phone_number)
-    personnel.email = data.get('email', personnel.email)
-    personnel.joining_date = data.get('joining_date', personnel.joining_date)
+    
+    # Handle joining_date formatting
+    if 'joining_date' in data:
+        personnel.joining_date = datetime.strptime(data['joining_date'], '%Y-%m-%d')
     personnel.last_update = datetime.utcnow()  # Update the last_update field
 
-    db.session.commit()
+    try:
+        db.session.commit()
+        return make_response(jsonify({'message': 'Personnel updated successfully'}), 200)
+    except Exception as e:
+        db.session.rollback()  # Rollback in case of an error
+        return make_response(jsonify({'error': str(e)}), 500)
 
-    return make_response(jsonify({'message': 'Personnel updated successfully'}), 200)
-
-#Deleting a personnel
-@app.route('/personnels/<int:id>', methods=['DELETE'])
-def delete_personnel(id):
-    personnel = Personnel.query.get(id)
-    if personnel is None:
-        return make_response(jsonify({'error': 'Personnel not found'}), 404)
-
-    db.session.delete(personnel)
-    db.session.commit()
-
-    return make_response(jsonify({'message': 'Personnel deleted successfully'}), 200)
 
 ######################################Units######################################################
 @app.route('/units', methods=['GET'])
