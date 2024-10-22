@@ -41,15 +41,7 @@ const Body = () => {
                     </div>
                 </div>
 
-                <div className="work">
-                    <img className='airforce' src='/Airforce.jpg' alt=''/>
-                    <div className="layer">
-                        <h3>OPERATIONS</h3>
-                        <p>Future ogoing or past activities</p>
-                        <Link to='/air-force'><i class="fa-solid fa-link"></i></Link>
-                    </div>
                 </div>
-            </div>
 
             <div>
                 <About/>

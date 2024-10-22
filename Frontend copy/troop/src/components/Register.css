@@ -94,3 +94,14 @@
     margin-top: 16px;
     font-weight: bold;
   }
+
+
+  @media only screen and (max-width:600px){
+    .body{
+      width: 100vwh;
+      height: 100vh;
+    }
+    .register-container {
+      margin-left: 50px;
+    }
+  }

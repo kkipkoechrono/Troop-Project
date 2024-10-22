@@ -17,21 +17,21 @@
   padding: 12px 35px;
 }
 
-.anchors {
+#anchors {
   display: flex;             
 }
 
-.anchors a {
+#anchors a {
   margin:20px 20px;     
   text-decoration: none;     
   color: #fff;      
   font-size: 20px; 
 }
-.anchors a i{
+#anchors a i{
   font-size: 15px;
 }
 
-.anchors a:hover {
+#anchors a:hover {
   color: burlywood;           
 }
 .btn{
@@ -82,4 +82,10 @@
 .content a:hover {
   background-color: #575c4d; 
   color: yellow; 
+}
+
+@media screen and (max-width: 600px) {
+   .nav h1{
+     font-size: 32px;
+   }
 }

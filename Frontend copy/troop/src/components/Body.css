@@ -19,15 +19,17 @@ section .welcome p{
     font-family: 'Poppins';
 }
 #work-list{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-    grid-gap:20px;
-    margin-top: 50px;
+   display: grid;
+   grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+   grid-gap:40px;
+   margin-top: 50px;
+   margin-left: 200px;
    }
    .work{
        border-radius: 10px;
        position: relative;
        overflow: hidden;
+       margin-left: 40px;
    }
    .work img{
        width: 100%;
@@ -35,9 +37,9 @@ section .welcome p{
        display: block;
        transition: transform 0.5s;
    }
-   .airforce{
+   /*.airforce{
     height: 660px;
-   }
+   }*/
    .layer{
        width: 100%;
        height: 0;
@@ -69,4 +71,14 @@ section .welcome p{
   }
   .work:hover .layer{
       height: 100%;
+  }
+
+  @media screen and (max-width: 600px){
+    section .welcome{
+        margin-left: 50px;
+    }
+    #work-list{
+        margin-left: 70px;
+    }
+    
   }

@@ -4,8 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 import jwt
 from models import db, Personnel, Unit, Role, Squad, Droprequest, Operations, User
-from datetime import datetime
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 
 
@@ -61,10 +60,11 @@ def login():
         return jsonify({'message': 'Invalid credentials'}), 401
     
     token = jwt.encode(
-        {"user_id": user.id, "exp": datetime.datetime.utcnow() + timedelta(minutes=60)},
-        app.config['SECRET_KEY'],
-        algorithm="HS256"
-    )
+    {"user_id": user.id, "exp": datetime.utcnow() + timedelta(minutes=60)},
+    app.config['SECRET_KEY'],
+    algorithm="HS256"
+)
+
     return jsonify({'token': token}), 200
 
 
@@ -260,7 +260,27 @@ def get_unit_by_id(id):
     return make_response(jsonify(unit_dict), 200)
 
 #Ading a new unit
+
+from datetime import datetime
+
 @app.route('/units', methods=['POST'])
+def add_unit():
+    data = request.get_json()
+
+    new_unit = Unit(
+        unit_name=data['unit_name'],
+        unit_type=data['unit_type'],
+        unit_location=data['unit_location'],
+        created_at=datetime.strptime(data['created_at'], '%Y-%m-%d')  # Convert the date string to a datetime object
+    )
+
+    db.session.add(new_unit)
+    db.session.commit()
+
+    return make_response(jsonify({'message': 'Unit added successfully', 'id': new_unit.unit_id}), 201)
+
+
+'''@app.route('/units', methods=['POST'])
 def add_unit():
     data = request.get_json()
     
@@ -274,7 +294,27 @@ def add_unit():
     db.session.add(new_unit)
     db.session.commit()
 
-    return make_response(jsonify({'message': 'Unit added successfully', 'id': new_unit.unit_id}), 201)
+    return make_response(jsonify({'message': 'Unit added successfully', 'id': new_unit.unit_id}), 201)'''
+#Updating unit date
+
+from datetime import datetime
+from flask import jsonify, make_response, request
+
+@app.route('/units/<int:id>', methods=['PUT'])
+def update_unit(id):
+    unit = Unit.query.get(id)
+    if unit is None:
+        return make_response(jsonify({'error': 'Unit not found'}), 404)
+
+    data = request.get_json()
+    
+    # Update only the unit_location if provided
+    if 'unit_location' in data:
+        unit.unit_location = data['unit_location']
+
+    db.session.commit()
+    return make_response(jsonify({'message': 'Unit location updated successfully'}), 200)
+
 
 # Deleting a unit
 @app.route('/units/<int:id>', methods=['DELETE'])

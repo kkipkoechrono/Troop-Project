@@ -85,3 +85,58 @@ html{
     font-weight: 300;
     font-family: 'Poppins';
 } 
+
+@media screen and (max-width: 600px) {
+    .about {
+        padding: 40px 10px; /* Adjusted padding for smaller screens */
+        height: auto; /* Allow height to adjust */
+    }
+    
+    .main {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+    }
+
+    .about img {
+        width: 90%; /* Responsive width for image */
+        max-width: 300px; /* Maintain maximum width */
+    }
+
+    .about-text {
+        width: 90%; /* Make text section responsive */
+    }
+
+    .about-text h1 {
+        font-size: 40px; /* Smaller heading size */
+    }
+
+    .about-text h5 {
+        font-size: 20px; /* Smaller subheading size */
+    }
+
+    .about-text p {
+        font-size: 16px; /* Smaller paragraph size */
+    }
+
+    #work-list {
+        display: flex; /* Change to flexbox for stacking */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+        padding: 10px; /* Adjust padding */
+    }
+
+    .item {
+        width: 90%; /* Make items responsive */
+        margin-bottom: 20px; /* Space between items */
+    }
+
+    .item img {
+        width: 80%; /* Adjust image size */
+        margin-top: 20px; /* Space from top */
+    }
+
+    .about-contact {
+        font-size: 16px; /* Adjust button size */
+        padding: 10px 20px; /* Adjust padding */
+    }
+}
