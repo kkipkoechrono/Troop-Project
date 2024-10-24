@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './LoginForm.css' 
 import {useNavigate} from 'react-router-dom'
-const API_URL = 'http://127.0.0.1:5555';
+const API_URL = 'https://troop-project-2.onrender.com';
 
 const LoginForm = () => {
     const [formData, setFormData] = useState({

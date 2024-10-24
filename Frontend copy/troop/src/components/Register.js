@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Register.css';
 import { Link } from 'react-router-dom';
 
-const API_URL = 'http://127.0.0.1:5555';
+const API_URL = 'https://troop-project-2.onrender.com';
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({

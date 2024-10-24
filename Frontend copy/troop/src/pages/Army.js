@@ -18,7 +18,7 @@ const Army = () => {
 
   useEffect(() => {
     const fetchPersonnel = async () => {
-      const response = await fetch('http://127.0.0.1:5555/personnels'); // Adjust the endpoint as necessary
+      const response = await fetch('https://troop-project-2.onrender.com/personnels'); // Adjust the endpoint as necessary
       const data = await response.json();
       setPersonnel(data);
       setLoading(false);
@@ -33,7 +33,7 @@ const Army = () => {
   };
 
   const handleAddMember = async () => {
-    const response = await fetch('http://127.0.0.1:5555/personnels', {
+    const response = await fetch('https://troop-project-2.onrender.com/personnels', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newMember),
@@ -45,7 +45,7 @@ const Army = () => {
   };
 
   const handleUpdateMember = async (id, updatedData) => {
-    const response = await fetch(`http://127.0.0.1:5555/personnels/${id}`, {
+    const response = await fetch(`https://troop-project-2.onrender.com/personnels/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedData),

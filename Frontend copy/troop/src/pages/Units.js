@@ -3,7 +3,7 @@ import axios from 'axios';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-const API_URL = 'http://127.0.0.1:5555';
+const API_URL = 'https://troop-project-2.onrender.com';
 
 const UnitTable = () => {
   const [units, setUnits] = useState([]);
