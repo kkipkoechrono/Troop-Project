@@ -6,8 +6,6 @@ import jwt
 from models import db, Personnel, Unit, Role, Squad, Droprequest, Operations, User
 from datetime import datetime, timedelta
 
-
-
 app = Flask(__name__)
 CORS(app)
 app.config['SECRET_KEY'] = '5bcd32d181b843adb1b09fda387692b3'
