@@ -3,6 +3,7 @@ import './Home.css';
 import Navbar from './Navbar';
 import Body from './Body';
 import Footer from './Footer';
+import PersonnelTable from './PersonnelTable';
 
 
 
@@ -14,7 +15,7 @@ const Home = () => {
       </section>
 
       <section className='body'>
-        <Body />
+       <PersonnelTable/>
       </section>
 
       <section>
